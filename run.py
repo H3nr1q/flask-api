@@ -1,5 +1,3 @@
-# run.py
-
 from flask import Flask
 from flask_migrate import Migrate
 from app.config import Config
@@ -11,16 +9,8 @@ migrate = Migrate()
 def init_db():
     db.create_all()
 
-app = create_app(Config)
-
-@app.before_first_request
-def create_tables():
-    init_db()
-
-@app.after_request
-def save_session(response):
-    db.session.remove()
-    return response
+app = create_app()
 
 if __name__ == '__main__':
+    app.register_blueprint(item_routes)  # Adicione esta linha
     app.run(debug=True)

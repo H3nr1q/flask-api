@@ -2,6 +2,7 @@
 
 from flask import Blueprint, jsonify, request
 from .models import Item
+from .extensions import db
 
 item_routes = Blueprint('items', __name__)
 
